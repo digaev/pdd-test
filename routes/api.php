@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
  //      return $request->user();
  //  })->middleware('auth:api');
 
-Route::resource('exams', 'ExamsController', [
+Route::resource('exams', 'API\ExamsController', [
     'only' => [
         'store', 'show'
     ]
