@@ -21,3 +21,9 @@ Route::resource('exams', 'API\ExamsController', [
         'store', 'show'
     ]
 ]);
+
+Route::resource('exams.questions', 'API\ExamQuestionsController', [
+    'only' => [
+        'show', 'update'
+    ]
+]);
