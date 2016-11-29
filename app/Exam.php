@@ -14,4 +14,9 @@ class Exam extends Model
     {
         return $this->getKey();
     }
+
+    public function questions()
+    {
+        return $this->hasMany('App\ExamQuestion');
+    }
 }
