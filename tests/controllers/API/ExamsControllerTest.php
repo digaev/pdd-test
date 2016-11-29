@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class ExamsControllerTest extends TestCase
 {
+    use DatabaseTransactions;
+
     public function testStore()
     {
         $this->json('POST', route('exams.store'))
