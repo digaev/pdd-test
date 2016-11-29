@@ -19,7 +19,7 @@ class ExamsControllerTest extends TestCase
         ->seeJson([
             'id' => $exam->id,
             'api_token' => $exam->api_token,
-            'total_questions' => '10'
+            'total_questions' => 10
         ]);
     }
 }
