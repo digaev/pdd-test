@@ -29,6 +29,6 @@ class CreatePddQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pdd_questions');
+        Schema::dropIfExists('pdd_questions');
     }
 }

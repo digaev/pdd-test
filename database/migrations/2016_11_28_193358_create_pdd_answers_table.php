@@ -16,7 +16,10 @@ class CreatePddAnswersTable extends Migration
         Schema::create('pdd_answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('pdd_question_id')->unsigned();
-            $table->foreign('pdd_question_id')->references('id')->on('pdd_questions');
+            $table->foreign('pdd_question_id')
+                ->references('id')
+                ->on('pdd_questions')
+                ->onDelete('cascade');
             $table->integer('number')->unsigned();
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ class CreatePddAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pdd_answers');
+        Schema::dropIfExists('pdd_answers');
     }
 }
