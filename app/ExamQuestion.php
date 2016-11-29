@@ -10,6 +10,11 @@ class ExamQuestion extends Model
         'exam_id', 'number', 'answer'
     ];
 
+    protected $casts = [
+        'exam_id' => 'integer',
+        'number' => 'integer'
+    ];
+
     public function exam()
     {
         return $this->belongsTo('App\Exam');

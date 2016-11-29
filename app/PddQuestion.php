@@ -10,6 +10,12 @@ class PddQuestion extends Model
         'ticket', 'number', 'answer'
     ];
 
+    protected $casts = [
+        'ticket' => 'integer',
+        'number' => 'integer',
+        'answer' => 'integer'
+    ];
+
     public function answers()
     {
         return $this->hasMany('App\PddAnswer');

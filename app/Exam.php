@@ -10,6 +10,10 @@ class Exam extends Model
         'api_token', 'total_questions'
     ];
 
+    protected $casts = [
+        'total_questions' => 'integer'
+    ];
+
     public function getAuthIdentifier()
     {
         return $this->getKey();

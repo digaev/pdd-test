@@ -10,6 +10,10 @@ class PddAnswer extends Model
         'number'
     ];
 
+    protected $casts = [
+        'number' => 'integer'
+    ];
+
     public function question()
     {
         return $this->belongsTo('App\PddQuestion');
