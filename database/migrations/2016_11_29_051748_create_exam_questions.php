@@ -20,6 +20,10 @@ class CreateExamQuestions extends Migration
                 ->references('id')
                 ->on('exams')
                 ->onDelete('cascade');
+            $table->integer('pdd_question_id')->unsigned();
+            $table->foreign('pdd_question_id')
+                ->references('id')
+                ->on('pdd_questions');
             $table->integer('number')->unsigned();
             $table->integer('answer')->unsigned()->nullable();
             $table->timestamps();
