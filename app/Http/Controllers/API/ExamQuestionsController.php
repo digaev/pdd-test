@@ -38,7 +38,26 @@ class ExamQuestionsController extends Controller
 
     public function update(Request $request, $examId, $questionId)
     {
-        //
+        $this->validate($request, [
+            'answer' => 'required|integer'
+        ]);
+
+        $exam = $this->findExam($examId, $questionId);
+        $question = $exam->questions()->where('number', $questionId)->firstOrFail();
+        if (!$question->answer) {
+            $question->answer = (int) $request->input('answer');
+            $question->save();
+        }
+
+        $json = [
+            'exam_id' => $exam->id,
+            'number' => $question->number,
+            'answer' => [
+                'number' => $question->answer,
+                'correct' => $question->pddQuestion->answer == $question->answer
+            ]
+        ];
+        return $json;
     }
 
     private function findExam($examId, $number)
