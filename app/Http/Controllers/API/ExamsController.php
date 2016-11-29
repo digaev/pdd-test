@@ -16,7 +16,8 @@ class ExamsController extends Controller
     public function store(Request $request)
     {
         $exam = Exam::create([
-            'api_token' => str_random(60)
+            'api_token' => str_random(60),
+            'total_questions' => 10
         ]);
         return $exam->toJson();
     }

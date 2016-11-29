@@ -16,6 +16,7 @@ class CreateExamsTable extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('api_token', 60)->unique();
+            $table->integer('total_questions')->unsigned()->default(10);
             $table->timestamps();
         });
     }

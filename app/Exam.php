@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Exam extends Model
 {
     protected $fillable = [
-        'api_token'
+        'api_token', 'total_questions'
     ];
 
     public function getAuthIdentifier()
