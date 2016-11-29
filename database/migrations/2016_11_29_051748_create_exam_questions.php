@@ -21,6 +21,7 @@ class CreateExamQuestions extends Migration
                 ->on('exams')
                 ->onDelete('cascade');
             $table->integer('number')->unsigned();
+            $table->integer('answer')->unsigned()->nullable();
             $table->timestamps();
         });
     }
