@@ -10,7 +10,7 @@ class ExamQuestionsControllerTest extends TestCase
             'question' => 1,
             'api_token' => $exam->api_token,
         ]))
-        ->seeJsonStructure(['exam_id', 'number', 'text', 'answers'])
+        ->seeJsonStructure(['exam_id', 'number', 'answer', 'text', 'answers'])
         ->seeJson([
             'exam_id' => $exam->id,
             'number' => 1

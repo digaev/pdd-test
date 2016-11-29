@@ -23,6 +23,7 @@ class ExamQuestionsController extends Controller
         return [
             'exam_id' => $exam->id,
             'number' => $question->number,
+            'answer' => $question->answer,
             'text' => $question->pddQuestion->questionText(),
             'answers' => $question->pddQuestion->answerText()
         ];
