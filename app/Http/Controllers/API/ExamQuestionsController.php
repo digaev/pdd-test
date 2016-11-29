@@ -20,14 +20,20 @@ class ExamQuestionsController extends Controller
         $exam = $this->findExam($examId, $questionId);
         $question = $exam->firstOrCreateQuestion($questionId);
 
-        return [
+        $json = [
             'exam_id' => $exam->id,
             'number' => $question->number,
-            'answer' => $question->answer,
-            'correct_answer' => $question->pddQuestion->answer,
             'text' => $question->pddQuestion->questionText(),
             'answers' => $question->pddQuestion->answerText()
         ];
+
+        if ($question->answer) {
+            $json['answer'] = [
+                'number' => $question->answer,
+                'correct' => $question->pddQuestion->answer == $question->answer
+            ];
+        }
+        return $json;
     }
 
     public function update(Request $request, $examId, $questionId)
