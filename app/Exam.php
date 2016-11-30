@@ -14,6 +14,10 @@ class Exam extends Model
         'total_questions' => 'integer'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     public function getAuthIdentifier()
     {
         return $this->getKey();
