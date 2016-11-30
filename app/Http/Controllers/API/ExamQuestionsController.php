@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundExceptio
 use Illuminate\Http\Request;
 
 use App\Exam;
+use App\ExamQuestion;
 
 class ExamQuestionsController extends Controller
 {
@@ -15,11 +16,8 @@ class ExamQuestionsController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function show($examId, $questionId)
+    public function show(Exam $exam, ExamQuestion $question)
     {
-        $exam = $this->findExam($examId, $questionId);
-        $question = $exam->firstOrCreateQuestion($questionId);
-
         $json = [
             'exam_id' => $exam->id,
             'number' => $question->number,
@@ -36,14 +34,12 @@ class ExamQuestionsController extends Controller
         return $json;
     }
 
-    public function update(Request $request, $examId, $questionId)
+    public function update(Request $request, Exam $exam, ExamQuestion $question)
     {
         $this->validate($request, [
-            'answer' => 'required|integer'
+            'answer' => 'required|integer',
         ]);
 
-        $exam = $this->findExam($examId, $questionId);
-        $question = $exam->questions()->where('number', $questionId)->firstOrFail();
         if (!$question->answer) {
             $question->answer = (int) $request->input('answer');
             $question->save();
@@ -58,16 +54,5 @@ class ExamQuestionsController extends Controller
             ]
         ];
         return $json;
-    }
-
-    private function findExam($examId, $number)
-    {
-        $exam = Exam::where('id', $examId)
-            ->where('id', Auth::guard('api')->id())
-            ->firstOrFail();
-        if ($number < 1 || $number > $exam->total_questions) {
-            throw new ModelNotFoundException;
-        }
-        return $exam;
     }
 }

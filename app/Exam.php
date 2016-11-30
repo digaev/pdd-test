@@ -4,8 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\ExamQuestion;
-
 class Exam extends Model
 {
     protected $fillable = [
@@ -28,10 +26,7 @@ class Exam extends Model
 
     public function firstOrCreateQuestion($number)
     {
-        $question = ExamQuestion::firstOrNew([
-            'exam_id' => $this->id,
-            'number' => $number
-        ]);
+        $question = $this->questions()->firstOrNew(['number' => $number]);
         if (!$question->exists) {
             $question->pdd_question_id = $this->randomPddQuestion()->id;
             $question->save();

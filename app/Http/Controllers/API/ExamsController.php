@@ -28,12 +28,8 @@ class ExamsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Exam $exam)
     {
-        $exam = Exam::where('id', $id)
-            // TODO: use user_id
-            ->where('id', Auth::guard('api')->id())
-            ->firstOrFail();
         return $exam->toJson();
     }
 }

@@ -19,7 +19,6 @@ class ExamQuestionsControllerTest extends TestCase
             'exam_id' => $exam->id,
             'number' => 1
         ]);
-        $exam->delete();
     }
 
     public function testUpdateWithWrongAnswer()

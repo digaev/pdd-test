@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
+use Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,7 +25,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('exam', function ($value) {
+            $exam = \App\Exam::where('id', $value)
+                ->where('id', Auth::guard('api')->id())
+                ->firstOrFail();
+
+            Route::bind('question', function ($value) use ($exam) {
+                $value = (int) $value;
+                if ($value < 1 || $value > $exam->total_questions) {
+                    throw new ModelNotFoundException;
+                }
+                return $exam->firstOrCreateQuestion($value);
+            });
+
+            return $exam;
+        });
 
         parent::boot();
     }
