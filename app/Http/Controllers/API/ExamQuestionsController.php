@@ -18,20 +18,7 @@ class ExamQuestionsController extends Controller
 
     public function show(Exam $exam, ExamQuestion $question)
     {
-        $json = [
-            'exam_id' => $exam->id,
-            'number' => $question->number,
-            'text' => $question->pddQuestion->questionText(),
-            'answers' => $question->pddQuestion->answerText()
-        ];
-
-        if ($question->answer) {
-            $json['answer'] = [
-                'number' => $question->answer,
-                'correct' => $question->pddQuestion->answer == $question->answer
-            ];
-        }
-        return $json;
+        return $question->toJson();
     }
 
     public function update(Request $request, Exam $exam, ExamQuestion $question)
@@ -41,18 +28,9 @@ class ExamQuestionsController extends Controller
         ]);
 
         if (!$question->answer) {
-            $question->answer = (int) $request->input('answer');
+            $question->answer = $request->input('answer');
             $question->save();
         }
-
-        $json = [
-            'exam_id' => $exam->id,
-            'number' => $question->number,
-            'answer' => [
-                'number' => $question->answer,
-                'correct' => $question->pddQuestion->answer == $question->answer
-            ]
-        ];
-        return $json;
+        return $question->toJson();
     }
 }
