@@ -1,6 +1,6 @@
 # PPD TEST
 
-Web-service for testing knowledge of traffic laws of Republic of Uzbekistan in question-answer mode.
+Universal RESTful question-answer tester build with Laravel 5.3. Currently configured for testing knowledge of traffic laws of Republic of Uzbekistan in question-answer mode.
 
 ## API
 
