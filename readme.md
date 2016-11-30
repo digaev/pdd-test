@@ -52,7 +52,7 @@ Response:
 * `exam_id` - exam id
 * `number` - number of question
 * `text` - text of the question
-* `answers` - array, answers to the question
+* `answers` - object, answers to the question
 
 ___
 
